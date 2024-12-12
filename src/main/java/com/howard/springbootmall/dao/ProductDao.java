@@ -9,11 +9,9 @@ public interface ProductDao {
 
     Integer updateProduct(Integer productId, ProductRequest productRequest);
 
-
-
     Product getProductById(Integer productId);
 
-
+    void deleteProductById(Integer productId);
 
 
 }
