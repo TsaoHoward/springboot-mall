@@ -1,6 +1,7 @@
 package com.howard.springbootmall.service;
 
 import com.howard.springbootmall.constant.ProductCategory;
+import com.howard.springbootmall.dto.ProductQueryParams;
 import com.howard.springbootmall.dto.ProductRequest;
 import com.howard.springbootmall.model.Product;
 
@@ -15,5 +16,5 @@ public interface ProductService {
 
     void deleteProductById(Integer productId);
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 }
