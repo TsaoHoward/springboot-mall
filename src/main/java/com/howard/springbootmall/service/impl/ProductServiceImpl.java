@@ -7,6 +7,8 @@ import com.howard.springbootmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
@@ -27,6 +29,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Integer updateProduct(Integer productId, ProductRequest product) {
         return productDao.updateProduct(productId, product);
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        List<Product> productList = productDao.getProducts();
+        return productList;
     }
 
     @Override
