@@ -33,22 +33,26 @@ public class ProductController {
     @PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody @Validated ProductRequest productRequest){
 
-//        Product product = new Product();
-//
-//        product.setPrice(productRequest.getPrice());
-//        product.setProductName(productRequest.getProductName());
-//        product.setCategory(productRequest.getCategory());
-//        product.setStock(productRequest.getStock());
-//        product.setImageUrl(productRequest.getImageUrl());
-//        if (!productRequest.getDescription().isEmpty()){
-//            product.setDescription(productRequest.getDescription());
-//        }
-//
-//        Date now = new Date();
-//        product.setCreatedDate("createdDate", now);
-//
         Integer productId = productService.createProduct(productRequest);
         Product newProduct = productService.getProductById(productId);
+
+        if (productId != null){
+            return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
+
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId, @RequestBody @Validated ProductRequest productRequest){
+
+        Product productCheck = productService.getProductById(productId);
+        if (productCheck == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        Integer returnId = productService.updateProduct(productId, productRequest);
+        Product newProduct = productService.getProductById(returnId);
 
         if (productId != null){
             return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
