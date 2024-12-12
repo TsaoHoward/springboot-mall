@@ -1,8 +1,10 @@
 package com.howard.springbootmall.service;
 
+import com.howard.springbootmall.dto.ProductRequest;
 import com.howard.springbootmall.model.Product;
-import org.springframework.stereotype.Component;
 
 public interface ProductService {
     Product getProductById(Integer productId);
+
+    Integer createProduct(ProductRequest product);
 }
