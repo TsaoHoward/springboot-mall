@@ -9,7 +9,7 @@ public class User {
 
     Integer userId;
 
-    @JsonProperty("e_mail")
+//    @JsonProperty("e_mail")
     String email;
 
     @JsonIgnore

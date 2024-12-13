@@ -42,7 +42,7 @@ public class UserController {
     public ResponseEntity<User> login(@RequestBody @Validated UserLoginRequest userLoginRequest){
 
         User user = userService.login(userLoginRequest);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 
