@@ -1,7 +1,6 @@
 package com.howard.springbootmall.dto;
 
 import com.howard.springbootmall.constant.ProductCategory;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public class ProductQueryParams {
 
