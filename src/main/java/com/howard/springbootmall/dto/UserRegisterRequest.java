@@ -3,13 +3,14 @@ package com.howard.springbootmall.dto;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class UserRegisterRequest {
     Integer userId;
 
-    @NotBlank
+    @Email
     String email;
 
     @NotBlank

@@ -8,11 +8,14 @@ import com.howard.springbootmall.model.Product;
 import com.howard.springbootmall.model.User;
 import com.howard.springbootmall.service.UserService;
 import com.howard.springbootmall.util.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -26,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/users/register")
-    public ResponseEntity<User> register(@RequestBody @Validated UserRegisterRequest userRegisterRequest){
+    public ResponseEntity<User> register(@RequestBody @Validated UserRegisterRequest userRegisterRequest) throws Exception {
 
         Integer userId = userService.register(userRegisterRequest);
         User newUser = userService.getUserById(userId);
