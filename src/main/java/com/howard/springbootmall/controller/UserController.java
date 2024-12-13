@@ -3,6 +3,7 @@ package com.howard.springbootmall.controller;
 import com.howard.springbootmall.constant.ProductCategory;
 import com.howard.springbootmall.dto.ProductQueryParams;
 import com.howard.springbootmall.dto.ProductRequest;
+import com.howard.springbootmall.dto.UserLoginRequest;
 import com.howard.springbootmall.dto.UserRegisterRequest;
 import com.howard.springbootmall.model.Product;
 import com.howard.springbootmall.model.User;
@@ -35,6 +36,13 @@ public class UserController {
         User newUser = userService.getUserById(userId);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Validated UserLoginRequest userLoginRequest){
+
+        User user = userService.login(userLoginRequest);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
     }
 
 
