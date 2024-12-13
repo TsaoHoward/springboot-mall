@@ -25,6 +25,8 @@ public class ProductDaoImpl implements ProductDao {
 
     private Object ProductRowMapper;
 
+
+
     @Override
     public Integer createProduct(ProductRequest product) {
 
