@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 @Component
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
             log.warn("email {} already registered!!!", userRegisterRequest.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+
+        String hashPassword = DigestUtils.md5DigestAsHex(userRegisterRequest.getPassword().getBytes());
+        userRegisterRequest.setPassword(hashPassword);
 
         return userDao.createUser(userRegisterRequest);
     }
@@ -53,10 +57,13 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
+        userLoginRequest.setPassword(DigestUtils.md5DigestAsHex(userLoginRequest.getPassword().getBytes()));
         if (user.getPassword().equals(userLoginRequest.getPassword())){
             return user;
         }else {
-            log.warn("email {} wrong password!!!", userLoginRequest.getEmail());
+            log.warn("email {} \n" +
+                    "wrong password: {} \n" +
+                    "correct password: {} ", userLoginRequest.getEmail(),userLoginRequest.getPassword(), user.getPassword());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
