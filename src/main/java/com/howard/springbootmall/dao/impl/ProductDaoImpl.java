@@ -32,16 +32,17 @@ public class ProductDaoImpl implements ProductDao {
                 "VALUES(:productName, :category, :imageUrl, :price, :stock, :description, :createdDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("productName", product.getProductName());
-        map.put("category", product.getCategory().toString());
-        map.put("imageUrl", product.getImageUrl());
-        map.put("price", product.getPrice());
-        map.put("stock", product.getStock());
-        map.put("description", product.getDescription());
+        map = mapSql(map, product);
+//        map.put("productName", product.getProductName());
+//        map.put("category", product.getCategory().toString());
+//        map.put("imageUrl", product.getImageUrl());
+//        map.put("price", product.getPrice());
+//        map.put("stock", product.getStock());
+//        map.put("description", product.getDescription());
 
         Date now =new Date();
         map.put("createdDate", now);
-        map.put("lastModifiedDate", now);
+//        map.put("lastModifiedDate", now);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -60,16 +61,18 @@ public class ProductDaoImpl implements ProductDao {
                 "WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
-        map.put("productId", productId);
-        map.put("productName", product.getProductName());
-        map.put("category", product.getCategory().toString());
-        map.put("imageUrl", product.getImageUrl());
-        map.put("price", product.getPrice());
-        map.put("stock", product.getStock());
-        map.put("description", product.getDescription());
+        map = mapSql(map, product);
 
-        Date now =new Date();
-        map.put("lastModifiedDate", now);
+        map.put("productId", productId);
+//        map.put("productName", product.getProductName());
+//        map.put("category", product.getCategory().toString());
+//        map.put("imageUrl", product.getImageUrl());
+//        map.put("price", product.getPrice());
+//        map.put("stock", product.getStock());
+//        map.put("description", product.getDescription());
+//
+//        Date now =new Date();
+//        map.put("lastModifiedDate", now);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -117,15 +120,7 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (productQueryParams.getCategory()!=null){
-            sql+=" AND category = :category";
-            map.put("category", productQueryParams.getCategory().name());
-        }
-
-        if (productQueryParams.getSearch()!= null){
-            sql+=" AND product_name LIKE :search";
-            map.put("search", "%"+productQueryParams.getSearch()+"%");
-        }
+        sql = addFilterSql(sql, map, productQueryParams);
 
         sql = sql + " ORDER BY "+productQueryParams.getOrderBy()
                 + " "+ productQueryParams.getSort()
@@ -146,17 +141,39 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
+        sql = addFilterSql(sql, map, productQueryParams);
+
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+        return total;
+    }
+
+    private String addFilterSql(String sql, Map<String, Object> map, ProductQueryParams productQueryParams){
+
         if (productQueryParams.getCategory()!=null){
-            sql+=" AND category = :category";
+            sql += " AND category = :category";
             map.put("category", productQueryParams.getCategory().name());
         }
 
         if (productQueryParams.getSearch()!= null){
-            sql+=" AND product_name LIKE :search";
+            sql += " AND product_name LIKE :search";
             map.put("search", "%"+productQueryParams.getSearch()+"%");
         }
 
-        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
-        return total;
+        return sql;
+    }
+
+    private Map<String, Object> mapSql(Map<String, Object> map, ProductRequest product){
+
+        map.put("productName", product.getProductName());
+        map.put("category", product.getCategory().toString());
+        map.put("imageUrl", product.getImageUrl());
+        map.put("price", product.getPrice());
+        map.put("stock", product.getStock());
+        map.put("description", product.getDescription());
+
+        Date now =new Date();
+        map.put("lastModifiedDate", now);
+
+        return map;
     }
 }
