@@ -1,6 +1,5 @@
 package com.howard.springbootmall.dao;
 
-import com.howard.springbootmall.constant.ProductCategory;
 import com.howard.springbootmall.dto.ProductQueryParams;
 import com.howard.springbootmall.dto.ProductRequest;
 import com.howard.springbootmall.model.Product;
@@ -21,5 +20,5 @@ public interface ProductDao {
 
     void deleteProductById(Integer productId);
 
-
+    void updateStock(Integer productId, Integer stock);
 }
