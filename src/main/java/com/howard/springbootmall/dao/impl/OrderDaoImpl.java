@@ -79,7 +79,9 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<OrderItem> getOrderItemById(Integer orderId) {
-        String sql = "SELECT * FROM `order_item` AS oi LEFT JOIN product AS p ON oi.product_id = p.product_id WHERE oi.product_id = :orderId";
+        String sql = "SELECT * FROM `order_item` AS oi " +
+                "LEFT JOIN product AS p ON oi.product_id = p.product_id " +
+                "WHERE oi.order_id = :orderId";
         Map<String, Object> map =new HashMap<>();
         map.put("orderId", orderId);
 
@@ -90,4 +92,5 @@ public class OrderDaoImpl implements OrderDao {
             return null;
         }
     }
+
 }

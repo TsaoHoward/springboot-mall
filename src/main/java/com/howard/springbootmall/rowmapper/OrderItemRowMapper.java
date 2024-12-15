@@ -17,7 +17,7 @@ public class OrderItemRowMapper implements RowMapper<OrderItem> {
         orderItem.setQuantity(resultSet.getInt("quantity"));
         orderItem.setAmount(resultSet.getInt("amount"));
         orderItem.setProductName(resultSet.getString("product_name"));
-        orderItem.setImgUrl(resultSet.getString("img_url"));
+        orderItem.setImgUrl(resultSet.getString("image_url"));
         return orderItem;
     }
 }
