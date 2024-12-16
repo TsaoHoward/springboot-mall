@@ -5,6 +5,7 @@ import com.howard.springbootmall.dao.ProductDao;
 import com.howard.springbootmall.dao.UserDao;
 import com.howard.springbootmall.dto.BuyItem;
 import com.howard.springbootmall.dto.CreateOrderRequest;
+import com.howard.springbootmall.dto.OrderQueryParams;
 import com.howard.springbootmall.model.Order;
 import com.howard.springbootmall.model.OrderItem;
 import com.howard.springbootmall.model.Product;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -87,8 +87,24 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = orderDao.getOrderById(orderId);
 
-        List<OrderItem> orderItemList = orderDao.getOrderItemById(orderId);
+        List<OrderItem> orderItemList = orderDao.getOrderItemByOrderId(orderId);
         order.setOrderItemList(orderItemList);
         return order;
+    }
+
+    @Override
+    public Integer countOrders(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrders(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList){
+            List<OrderItem> orderItemList = orderDao.getOrderItemByOrderId(order.getOrderId());
+            order.setOrderItemList(orderItemList);
+        }
+        return orderList;
     }
 }
