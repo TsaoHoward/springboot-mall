@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springbootmybatis.mapper.ProductMapper">
+
+    <select id="findAll" parameterType="map" resultType="com.example.springbootmybatis.entity.Product">
+        SELECT product_id, product_name, category, image_url, price, stock, description, created_date, last_modified_date
+        FROM product
+        <where>
+            <if test="productName != null and productName != ''">
+                AND product_name LIKE CONCAT('%', #{productName}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="stock != null">
+                AND stock = #{stock}
+            </if>
+            <if test="price != null">
+                AND price = #{price}
+            </if>
+        </where>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="com.example.springbootmybatis.entity.Product">
+        SELECT * FROM product WHERE product_id = #{productId}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.example.springbootmybatis.entity.Product">
+        SELECT * FROM product WHERE product_name = #{productName}
+    </select>
+
+    <select id="selectLastInsertId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        <where>
+            <if test="productName != null and productName != ''">
+                AND product_name LIKE CONCAT('%', #{productName}, '%')
+            </if>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="stock != null">
+                AND stock = #{stock}
+            </if>
+            <if test="price != null">
+                AND price = #{price}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insertProduct" parameterType="com.example.springbootmybatis.entity.Product">
+        INSERT INTO product (product_name, category, image_url, price, stock, description)
+        VALUES (#{productName}, #{category}, #{imageUrl}, #{price}, #{stock}, #{description})
+    </insert>
+
+    <update id="updateById" parameterType="com.example.springbootmybatis.entity.Product">
+        UPDATE product
+        SET product_name=#{productName}, category=#{category}, image_url=#{imageUrl}, price=#{price}, stock=#{stock}, description=#{description}, last_modified_date=#{lastModifiedDate}
+        WHERE product_id = #{productId}
+    </update>
+    <update id="updateStockById" parameterType="com.example.springbootmybatis.entity.Product">
+        UPDATE product
+        SET stock=#{stock}
+        WHERE product_id = #{productId}
+    </update>
+
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM product WHERE product_id = #{productId};
+    </delete>
+</mapper>
