@@ -1,22 +1,30 @@
 package com.example.springbootmybatis.mapper;
 
-import com.example.springbootmybatis.entity.Product;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.HashMap;
+import com.example.springbootmybatis.po.Product;
+import com.example.springbootmybatis.po.ProductExample;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import org.apache.ibatis.annotations.Param;
 
-@Mapper
 public interface ProductMapper {
-    Product findById(Integer id);
-    Integer count(Product product);
-    List<Product> findAll(Map<String, Object> paramMap);
-    void insertProduct(Product product);
-    Product findByName(String name);
-    Integer selectLastInsertId();
-    void deleteById(Integer id);
-    void updateById(Product product);
-    void updateStockById(Product product);
+    long countByExample(ProductExample example);
+
+    int deleteByExample(ProductExample example);
+
+    int deleteByPrimaryKey(Integer productId);
+
+    int insert(Product row);
+
+    int insertSelective(Product row);
+
+    List<Product> selectByExample(ProductExample example);
+
+    Product selectByPrimaryKey(Integer productId);
+
+    int updateByExampleSelective(@Param("row") Product row, @Param("example") ProductExample example);
+
+    int updateByExample(@Param("row") Product row, @Param("example") ProductExample example);
+
+    int updateByPrimaryKeySelective(Product row);
+
+    int updateByPrimaryKey(Product row);
 }
