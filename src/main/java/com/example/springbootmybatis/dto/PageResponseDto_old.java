@@ -2,15 +2,15 @@ package com.example.springbootmybatis.dto;
 
 import java.util.List;
 
-public class PageResponseDto<T> {
+public class PageResponseDto_old<T> {
     private int total;
     private int limit;
     private int offset;
     private List<T> data;
 
-    public PageResponseDto() {}
+    public PageResponseDto_old() {}
 
-    public PageResponseDto(int total, int limit, int offset, List<T> data) {
+    public PageResponseDto_old(int total, int limit, int offset, List<T> data) {
         this.total = total;
         this.limit = limit;
         this.offset = offset;

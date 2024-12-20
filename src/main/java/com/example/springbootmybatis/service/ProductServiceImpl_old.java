@@ -1,6 +1,7 @@
 //package com.example.springbootmybatis.service;
 //
 //import com.example.springbootmybatis.entity.Product;
+//import com.example.springbootmybatis.mapper.ProductMapper;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@
 //import java.util.Map;
 //
 //@Service
-//public class ProductServiceImpl implements ProductService {
+//public class ProductServiceImpl_old implements ProductService_old {
 //
 //    @Autowired
 //    private ProductMapper productMapper;
 //
-//    private final static Logger log = LoggerFactory.getLogger(ProductService.class);
+//    private final static Logger log = LoggerFactory.getLogger(ProductService_old.class);
 //
 //    @Override
 //    public Product findById(Integer id){

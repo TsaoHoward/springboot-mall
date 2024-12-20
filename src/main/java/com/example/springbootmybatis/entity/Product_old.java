@@ -1,10 +1,8 @@
 package com.example.springbootmybatis.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Date;
 
-public class Product {
+public class Product_old {
     private Integer productId;
     private String productName;
     private String category;
@@ -21,11 +19,11 @@ public class Product {
 //    private Integer offset;
 
 
-    public Product() {
+    public Product_old() {
     }
 
-    public Product(Integer productId, String productName, String category,
-                   String imageUrl, Integer price, Integer stock, String description) {
+    public Product_old(Integer productId, String productName, String category,
+                       String imageUrl, Integer price, Integer stock, String description) {
         this.productId = productId;
         this.productName = productName;
         this.category = category;
