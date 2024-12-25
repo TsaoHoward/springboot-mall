@@ -1,9 +1,8 @@
 package com.example.springbootmybatis.controller;
 
 import com.example.springbootmybatis.dto.PageResponseDto;
-import com.example.springbootmybatis.dto.ResponseDto;
-import com.example.springbootmybatis.po.Product;
-import com.example.springbootmybatis.po.ProductExample;
+import com.example.springbootmybatis.dto.ProductDto;
+//import com.example.springbootmybatis.po.ProductExample;
 import com.example.springbootmybatis.service.ProductService;
 import com.example.springbootmybatis.vo.ProductDetailVo;
 import com.example.springbootmybatis.vo.ProductListVo;
@@ -23,10 +22,10 @@ public class ProductController {
     @GetMapping("/{productId}")
     public ResponseEntity<?> getProductById(@PathVariable Integer productId){
 
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setProductId(productId);
+        ProductDto productDto = new ProductDto();
+        productDto.setProductId(productId);
 
-        ProductDetailVo productDetailVo = productService.findProduct(responseDto);
+        ProductDetailVo productDetailVo = productService.findProduct(productDto);
         if(productDetailVo != null){
             return ResponseEntity.ok(productDetailVo);
         }
@@ -34,8 +33,8 @@ public class ProductController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> createProduct(@RequestBody @Validated ResponseDto responseDto){
-        ProductDetailVo productDetailVo = productService.addProduct(responseDto);
+    public ResponseEntity<?> createProduct(@RequestBody @Validated ProductDto productDto){
+        ProductDetailVo productDetailVo = productService.addProduct(productDto);
         if(productDetailVo != null){
             return ResponseEntity.ok(productDetailVo);
         }
@@ -43,9 +42,9 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    public ResponseEntity<?> updateProduct(@PathVariable Integer productId, @RequestBody @Validated ResponseDto responseDto){
-        responseDto.setProductId(productId);
-        ProductDetailVo productDetailVo = productService.alterProduct(responseDto);
+    public ResponseEntity<?> updateProduct(@PathVariable Integer productId, @RequestBody @Validated ProductDto productDto){
+        productDto.setProductId(productId);
+        ProductDetailVo productDetailVo = productService.alterProduct(productDto);
         if(productDetailVo != null){
             return ResponseEntity.ok(productDetailVo);
         }
@@ -54,9 +53,9 @@ public class ProductController {
 
     @DeleteMapping("/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer productId){
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setProductId(productId);
-        ProductDetailVo productDetailVo = productService.deleteProductById(responseDto);
+        ProductDto productDto = new ProductDto();
+        productDto.setProductId(productId);
+        ProductDetailVo productDetailVo = productService.deleteProductById(productDto);
         if(productDetailVo != null){
             return ResponseEntity.ok(productDetailVo);
         }
@@ -64,7 +63,7 @@ public class ProductController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<ProductListVo> findAll(@RequestBody @Validated PageResponseDto<ProductExample.Criteria> pageRequest) {
+    public ResponseEntity<ProductListVo> findAll(@RequestBody @Validated PageResponseDto<?> pageRequest) {
         ProductListVo productListVo = productService.findAll(pageRequest);
         return ResponseEntity.ok(productListVo);
     }

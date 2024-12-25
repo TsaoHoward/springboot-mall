@@ -1,6 +1,6 @@
 package com.example.springbootmybatis.dto;
 
-import com.example.springbootmybatis.po.ProductExample;
+//import com.example.springbootmybatis.po.ProductExample;
 
 import java.util.List;
 
@@ -11,18 +11,18 @@ public class PageResponseDto<T> {
     private List<T> data;        // 分頁數據
     private boolean distinct;    // 是否 distinct 過濾
     private String orderBy;      // 排序字段
-    private List<ProductExample.Criteria> criteria;     // 篩選條件，類似 ProductExample 中的 Criteria
+//    private List<ProductExample.Criteria> criteria;     // 篩選條件，類似 ProductExample 中的 Criteria
 
     public PageResponseDto() {}
 
-    public PageResponseDto(int total, int limit, int offset, List<T> data, boolean distinct, String orderBy, List<ProductExample.Criteria> criteria) {
+    public PageResponseDto(int total, int limit, int offset, List<T> data, boolean distinct, String orderBy) {
         this.total = total;
         this.limit = limit;
         this.offset = offset;
         this.data = data;
         this.distinct = distinct;
         this.orderBy = orderBy;
-        this.criteria = criteria;
+//        this.criteria = criteria;
     }
 
     public int getTotal() {
@@ -73,11 +73,11 @@ public class PageResponseDto<T> {
         this.orderBy = orderBy;
     }
 
-    public List<ProductExample.Criteria> getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(List<ProductExample.Criteria> criteria) {
-        this.criteria = criteria;
-    }
+//    public List<ProductExample.Criteria> getCriteria() {
+//        return criteria;
+//    }
+//
+//    public void setCriteria(List<ProductExample.Criteria> criteria) {
+//        this.criteria = criteria;
+//    }
 }

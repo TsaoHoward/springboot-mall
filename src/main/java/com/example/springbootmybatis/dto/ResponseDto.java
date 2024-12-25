@@ -1,6 +1,6 @@
 package com.example.springbootmybatis.dto;
 
-import com.example.springbootmybatis.po.ProductExample;
+//import com.example.springbootmybatis.po.ProductExample;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ResponseDto {
     // 以下為新增的屬性，映射 ProductExample 中的查詢條件相關屬性
     private String orderByClause;
     private boolean distinct;
-    private List<ProductExample.Criteria> oredCriteria;  // 引入 Criteria 用於查詢條件
+//    private List<ProductExample.Criteria> oredCriteria;  // 引入 Criteria 用於查詢條件
 
     // Getters and Setters
     public Integer getProductId() {
@@ -110,11 +110,11 @@ public class ResponseDto {
         this.distinct = distinct;
     }
 
-    public List<ProductExample.Criteria> getOredCriteria() {
-        return oredCriteria;
-    }
-
-    public void setOredCriteria(List<ProductExample.Criteria> oredCriteria) {
-        this.oredCriteria = oredCriteria;
-    }
+//    public List<ProductExample.Criteria> getOredCriteria() {
+//        return oredCriteria;
+//    }
+//
+//    public void setOredCriteria(List<ProductExample.Criteria> oredCriteria) {
+//        this.oredCriteria = oredCriteria;
+//    }
 }

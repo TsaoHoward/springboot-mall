@@ -1,70 +1,54 @@
-package com.example.springbootmybatis.po;
+package com.example.springbootmybatis.vo;
 
-import jakarta.annotation.Generated;
 import java.util.Date;
 
-public class User {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+public class UserDetailVo {
     private Integer userId;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String email;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String password;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Date createdDate;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Date lastModifiedDate;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public Integer getUserId() {
         return userId;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getEmail() {
         return email;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getPassword() {
         return password;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public Date getCreatedDate() {
         return createdDate;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public Date getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }

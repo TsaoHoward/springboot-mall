@@ -1,41 +1,27 @@
-package com.example.springbootmybatis.entity;
+package com.example.springbootmybatis.dto;
+
+//import com.example.springbootmybatis.po.ProductExample;
 
 import java.util.Date;
+import java.util.List;
 
-public class Product_old {
+public class ProductDto {
     private Integer productId;
     private String productName;
     private String category;
-    private String description;
-    private Integer price;
     private String imageUrl;
+    private Integer price;
     private Integer stock;
+    private String description;
     private Date createdDate;
     private Date lastModifiedDate;
 
-//    @JsonIgnore
-//    private Integer limit;
-//    @JsonIgnore
-//    private Integer offset;
+    // 以下為新增的屬性，映射 ProductExample 中的查詢條件相關屬性
+    private String orderByClause;
+    private boolean distinct;
+//    private List<ProductExample.Criteria> oredCriteria;  // 引入 Criteria 用於查詢條件
 
-
-    public Product_old() {
-    }
-
-    public Product_old(Integer productId, String productName, String category,
-                       String imageUrl, Integer price, Integer stock, String description) {
-        this.productId = productId;
-        this.productName = productName;
-        this.category = category;
-        this.imageUrl = imageUrl;
-        this.price = price;
-        this.stock = stock;
-        this.description = description;
-//        this.limit = limit;
-//        this.offset = offset;
-    }
-
-
+    // Getters and Setters
     public Integer getProductId() {
         return productId;
     }
@@ -60,12 +46,12 @@ public class Product_old {
         this.category = category;
     }
 
-    public String getDescription() {
-        return description;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getPrice() {
@@ -76,20 +62,20 @@ public class Product_old {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public Integer getStock() {
         return stock;
     }
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreatedDate() {
@@ -107,20 +93,28 @@ public class Product_old {
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
-//
-//    public Integer getLimit() {
-//        return limit;
+
+    public String getOrderByClause() {
+        return orderByClause;
+    }
+
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
+    }
+
+//    public List<ProductExample.Criteria> getOredCriteria() {
+//        return oredCriteria;
 //    }
 //
-//    public void setLimit(Integer limit) {
-//        this.limit = limit;
-//    }
-//
-//    public Integer getOffset() {
-//        return offset;
-//    }
-//
-//    public void setOffset(Integer offset) {
-//        this.offset = offset;
+//    public void setOredCriteria(List<ProductExample.Criteria> oredCriteria) {
+//        this.oredCriteria = oredCriteria;
 //    }
 }
